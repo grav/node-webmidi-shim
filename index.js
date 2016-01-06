@@ -11,5 +11,10 @@ f.startLoop(100)
 
 //
 
-f.queue(q,{o: o, v: [0x90, 48, 64], t: perfNow()+1000})
+var now = perfNow()+100;
+[48,48,48,50,52,52,52].map((x,i) => {
+	f.queue(q,{o: o, v: [0x90, x, 64], t: now+i*250})	
+	f.queue(q,{o: o, v: [0x80, x, 64], t: now+i*250+100})	
+})
+
 
