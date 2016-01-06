@@ -1,5 +1,5 @@
-var perfNow = require("./performance-now");
-var midi = require('./midi')
+var perfNow = require("performance-now");
+var midi = require('midi')
 var f = require('./fun.js');
 
 var o = new midi.output();
@@ -7,9 +7,7 @@ o.openPort(0);
 
 q = [];
 
-f.startLoop(100)
-
-//
+f.startLoop(10)
 
 var now = perfNow()+100;
 [48,48,48,50,52,52,52].map((x,i) => {
