@@ -1,7 +1,6 @@
 var perfNow = require("performance-now");
 
 function play(o,v){
-	console.log("play",o,v);
 	o.sendMessage(v);
 }
 
@@ -15,7 +14,6 @@ function queue(q,e){
 }
 
 function playNext(q){
-//	console.log("checking queue ...")
 	var c = 0;
 	var now = perfNow();
 	for (e of q){
@@ -32,7 +30,6 @@ function startLoop(i){
 	return setInterval(_=>{
 		var q_ = playNext(q);
 		if(q_){
-			console.log(q.length, q_.length)
 			q = q_;
 		}
 	}, i);
