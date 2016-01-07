@@ -56,9 +56,8 @@ function createOutput(midi,idx,q){
 function createInput(midi,idx){
 	var i = new midi.output();
 	var name = i.getPortName(idx);
-	i.on = 
 	return {
-		_i: i;
+		_i: i,
 		id: name,
 		name: name
 	}
@@ -85,5 +84,7 @@ function requestMIDIAccess(){
 }
 
 module.exports = {
+	startLoop: startLoop, 
+	queue: queue,
 	requestMIDIAccess: requestMIDIAccess
 };
