@@ -1,8 +1,8 @@
 {
-  "name": "midi-fun",
-  "version": "1.0.0",
+  "name": "webmidi-shim",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "webmidi.js",
   "dependencies": {
     "midi": "^0.9.4",
     "performance-now": "^0.2.0"
@@ -11,6 +11,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Mikkel Gravgaard",
+  "license": "MIT"
 }
