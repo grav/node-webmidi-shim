@@ -1,7 +1,7 @@
 # node-webmidi-shim
 Shim for the Web MIDI API based on node-midi
 
-This project implements the Web MIDI API in Node.
+This project implements the Web MIDI API (https://webaudio.github.io/web-midi-api/) in Node.
 
 It allows for creating MIDI applications that will both work in the browser as well as in a Node-environment. 
 
@@ -33,3 +33,10 @@ Examples
 ---
 My specific use-case is getting a sequencer app (https://github.com/grav/seq) running both in Chrome and on a Raspberry Pi. Currently, it's web-only, but the goal is to produce a version running headlessly on an RPi
 
+Current status
+---
+Currently, only MIDI out is implemented. Notable missing features are:
+- MIDI in(!)
+- get notified when MIDI setup changes (`onstatechange`)
+- various attributes of the MIDI devices
+- the concept of Ports
