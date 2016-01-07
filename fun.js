@@ -26,16 +26,64 @@ function playNext(q){
 	
 }
 
-function startLoop(i){
+function startLoop(ma,i){
 	return setInterval(_=>{
-		var q_ = playNext(q);
-		if(q_){
-			q = q_;
+		var q = playNext(ma._q);
+		if(q){
+			ma._q = q;
 		}
 	}, i);
 }
 
+function createOutput(midi,idx,q){
+	var o = new midi.output();
+	var name = o.getPortName(idx);
+	return {
+		send: function(v, t) {
+			// todo - handle no t
+			queue(q, {
+				o: o,
+				v: v,
+				t: t
+			})
+		},
+		id: name,
+		name: name
+	}
+	
+}
+
+function createInput(midi,idx){
+	var i = new midi.output();
+	var name = i.getPortName(idx);
+	i.on = 
+	return {
+		_i: i;
+		id: name,
+		name: name
+	}
+}
+
+function requestMIDIAccess(){
+	var midi = require('midi');
+	var ma;
+	var outputs = {};
+	var nOutputs = new midi.output().getPortCount();
+	for(var i=0; i < nOutputs; i++){
+		var o = createOutput(midi,i,ma);
+		var id = o.id;
+		outputs[id] = o;
+	}
+	var ma = {
+		_q: [],
+		inputs: {},
+		outputs: outputs,
+		sysexEnabled: false
+	};
+	startLoop(ma,10);
+	return Promise.resolve(ma);
+}
+
 module.exports = {
-	startLoop: startLoop, 
-	queue: queue
+	requestMIDIAccess: requestMIDIAccess
 };
