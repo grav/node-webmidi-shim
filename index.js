@@ -1,6 +1,6 @@
 var perfNow = require("performance-now");
 var midi = require('midi')
-var f = require('./fun.js');
+var webmidi = require('./webmidi.js');
 
 function test(now){
 	return function(ma){
@@ -18,4 +18,4 @@ function test(now){
 	}
 }
 
-f.requestMIDIAccess().then(test(perfNow()+1000))
+webmidi.requestMIDIAccess().then(test(perfNow()+1000))
