@@ -35,13 +35,14 @@ function startLoop(ma,i){
 	}, i);
 }
 
-function createOutput(midi,idx,q){
+function createOutput(midi,idx,ma){
 	var o = new midi.output();
 	var name = o.getPortName(idx);
+	o.openPort(idx);
 	return {
 		send: function(v, t) {
 			// todo - handle no t
-			queue(q, {
+			queue(ma._q, {
 				o: o,
 				v: v,
 				t: t
@@ -65,19 +66,19 @@ function createInput(midi,idx){
 
 function requestMIDIAccess(){
 	var midi = require('midi');
-	var ma;
-	var outputs = {};
+	var ma = {
+		_q: [],
+		sysexEnabled: false,		
+	};
+	var outputs = [];
 	var nOutputs = new midi.output().getPortCount();
 	for(var i=0; i < nOutputs; i++){
 		var o = createOutput(midi,i,ma);
-		var id = o.id;
-		outputs[id] = o;
+		outputs.push(o);
 	}
-	var ma = {
-		_q: [],
-		inputs: {},
-		outputs: outputs,
-		sysexEnabled: false
+	ma.outputs = {
+		keys: _ => outputs.map(o=>o.id)[Symbol.iterator](),
+		values: _ => outputs[Symbol.iterator]()
 	};
 	startLoop(ma,10);
 	return Promise.resolve(ma);

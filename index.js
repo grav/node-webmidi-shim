@@ -2,23 +2,20 @@ var perfNow = require("performance-now");
 var midi = require('midi')
 var f = require('./fun.js');
 
-var o = new midi.output();
-var i = new midi.input();
-var n = 0;
-i.openPort(n); // This is apparently necessary for sound to come out on RPi!?
+function test(now){
+	return function(ma){
+		var d = 250;
 
-console.log("using port", o.getPortName(n));
-o.openPort(n);
+		for(k of ma.outputs.values()){
+			console.log(k);
+		}
+	
+		var o = ma.outputs.values().next().value; // lovely
+		[48,48,48,50,52,52,52].map((x,i) => {
+			o.send([0x90, x, 64],now+i*d)
+			o.send([0x80, x, 64], now+i*d+d/2)
+		})
+	}
+}
 
-this._q = [];
-
-f.startLoop(this,10)
-
-var now = perfNow()+100;
-var d = 100;
-[48,48,48,50,52,52,52].map((x,i) => {
-	f.queue(this._q,{o: o, v: [0x90, x, 64], t: now+i*d})	
-	f.queue(this._q,{o: o, v: [0x80, x, 64], t: now+i*d+d/2})	
-})
-
-
+f.requestMIDIAccess().then(test(perfNow()+1000))
