@@ -85,7 +85,5 @@ function requestMIDIAccess(){
 }
 
 module.exports = {
-	startLoop: startLoop, 
-	queue: queue,
 	requestMIDIAccess: requestMIDIAccess
 };
