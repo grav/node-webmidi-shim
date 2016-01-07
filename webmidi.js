@@ -57,6 +57,11 @@ function createOutput(midi,idx,ma){
 function createInput(midi,idx){
 	var i = new midi.output();
 	var name = i.getPortName(idx);
+	try {
+		i.openPort(idx);
+	} catch (e){
+	  	console.log(e)
+	}
 	return {
 		_i: i,
 		id: name,
@@ -72,13 +77,24 @@ function requestMIDIAccess(){
 	};
 	var outputs = [];
 	var nOutputs = new midi.output().getPortCount();
-	for(var i=0; i < nOutputs; i++){
-		var o = createOutput(midi,i,ma);
+	for(var idx=0; idx < nOutputs; idx++){
+		var o = createOutput(midi,idx,ma);
 		outputs.push(o);
+	}
+
+	var inputs = [];
+	var nInputs = new midi.input().getPortCount();
+	for(var idx=0; idx < nInputs; idx++){
+		var i = createInput(midi,idx,ma);
+		inputs.push(i);
 	}
 	ma.outputs = {
 		keys: _ => outputs.map(o=>o.id)[Symbol.iterator](),
 		values: _ => outputs[Symbol.iterator]()
+	};
+	ma.inputs = {
+		keys: _ => inputs.map(i=>i.id)[Symbol.iterator](),
+		values: _ => inputs[Symbol.iterator]()
 	};
 	startLoop(ma,10);
 	return Promise.resolve(ma);
