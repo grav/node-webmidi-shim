@@ -52,18 +52,30 @@ function createOutput(midi,idx,ma){
 }
 
 function createInput(midi,idx){
-	var i = new midi.output();
+	var i = new midi.input();
 	var name = i.getPortName(idx);
 	try {
 		i.openPort(idx);
 	} catch (e){
 	  	console.log(e)
 	}
-	return {
+	var input = {
 		_i: i,
 		id: name,
-		name: name
-	}
+		name: name,
+		onmidimessage: null
+	};
+	i.on('message', (d,m) => {
+		if(input.onmidimessage){
+			var e = {
+				timestamp: d,
+				data: m
+			}
+			input.onmidimessage(e);
+		}
+	});
+	
+	return input;
 }
 
 function requestMIDIAccess(){
