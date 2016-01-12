@@ -35,8 +35,9 @@ My specific use-case is getting a sequencer app (https://github.com/grav/seq) ru
 
 Current status
 ---
-Currently, only MIDI out is implemented. Notable missing features are:
-- MIDI in(!)
+Alpha with a big 'A'. Crashes quite fast!
+
+Notable missing features are:
 - get notified when MIDI setup changes (`onstatechange`)
 - various attributes of the MIDI devices
 - the concept of Ports
