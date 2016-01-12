@@ -22,16 +22,13 @@ function playNext(q){
 			play(e.o,e.v);
 		}
 	}
-	return q.slice(c);
+	return c > 0 ? q.slice(c) : q;
 	
 }
 
 function startLoop(ma,i){
 	return setInterval(_=>{
-		var q = playNext(ma._q);
-		if(q){
-			ma._q = q;
-		}
+		ma._q = playNext(ma._q);
 	}, i);
 }
 
