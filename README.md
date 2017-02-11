@@ -33,7 +33,9 @@ Similar projects
 ---
 It's sorta like https://github.com/cwilso/WebMIDIAPIShim, which however is dependent on the proprietary Jazz-Plugin (http://jazz-soft.net/download/Jazz-Plugin), which is limited to x86 architectures.
 
-This shim is based on RtMidi (https://github.com/thestk/rtmidi), which bridges to the various OS-specific MIDI APIs, so it can run on several architectures. 
+This shim is based [node-midi](https://github.com/justinlatimer/node-midi), 
+which is again based on on [RtMidi](https://github.com/thestk/rtmidi), which bridges to the various OS-specific MIDI APIs, 
+so this shim can run on several architectures. 
 
 Examples
 ---
@@ -41,9 +43,13 @@ My specific use-case is getting a sequencer app (https://github.com/grav/seq) ru
 
 Current status
 ---
-Alpha with a big 'A'. Crashes quite fast!
+Still not feature complete - but doesn't crash randomly anymore, since inputs are now running in child processes.
 
 Notable missing features are:
 - get notified when MIDI setup changes (`onstatechange`)
 - various attributes of the MIDI devices
 - the concept of Ports
+
+Acknowledements
+---
+- [ryanlaws](https://github.com/ryanlaws) for suggesting [spawning inputs in child processes](https://github.com/justinlatimer/node-midi/issues/95#issuecomment-241215430)
