@@ -3,11 +3,11 @@ Shim for the Web MIDI API based on node-midi
 
 This project implements the Web MIDI API (https://webaudio.github.io/web-midi-api/) in Node.
 
-It allows for creating MIDI applications that will both work in the browser as well as in a Node-environment. 
+It allows for creating MIDI applications that will both work in the browser (currently Google Chrome), as well as in a Node-environment. 
 
 Requirements
 ---
-Tested with Node 4 and Node 5. Uses ES6.
+Tested with Node 4, 5 and 6. Uses ES6.
 
 Usage
 ---
@@ -18,10 +18,16 @@ $ npm install webmidi-shim
 
 Then, in a node repl:
 ```
-var r = require('webmidi-shim');
-r.requestMIDIAccess().then(ma => ma.outputs.values().next().value.send([0x90, 48, 64],1000))
+var r = require('webmidi-shim')
+
+r.requestMIDIAccess().then(ma => {
+  // send a note-on C3 velocity 64 to the first connected MIDI output device
+  ma.outputs.values().next().value.send([0x90, 48, 64],1000))
+
+  // log any incoming messages from the first connected MIDI input device
+  ma.inputs.values().next().value.onmidimessage = console.log
+})
 ```
-This will send a note-on C3 to the first connected MIDI device.
 
 Similar projects
 ---
