@@ -1,10 +1,10 @@
 {
   "name": "webmidi-shim",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "webmidi.js",
   "dependencies": {
-    "midi": "^0.9.4",
+    "midi": "^0.9.5",
     "performance-now": "^0.2.0"
   },
   "devDependencies": {},
