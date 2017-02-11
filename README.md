@@ -22,7 +22,7 @@ var r = require('webmidi-shim')
 
 r.requestMIDIAccess().then(ma => {
   // send a note-on C3 velocity 64 to the first connected MIDI output device
-  ma.outputs.values().next().value.send([0x90, 48, 64],1000))
+  ma.outputs.values().next().value.send([0x90, 48, 64],1000)
 
   // log any incoming messages from the first connected MIDI input device
   ma.inputs.values().next().value.onmidimessage = console.log
