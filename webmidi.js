@@ -1,3 +1,5 @@
+'use strict';
+
 const midi = require('midi');
 const perfNow = require("performance-now");
 const cp = require('child_process');
@@ -18,7 +20,7 @@ function queue(q, e) {
 function playNext(q) {
 	var c = 0;
 	var now = perfNow();
-	for (e of q) {
+	for (let e of q) {
 		if (e.t < now) {
 			c++;
 			play(e.o, e.v);

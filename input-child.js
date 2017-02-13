@@ -1,3 +1,5 @@
+'use strict';
+
 var midi = require('midi')
 
 var port = Number.parseInt(process.argv[2], 10);
